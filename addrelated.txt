@@ -1,0 +1,64 @@
+/* Contentview addRelated shows the interface for linking related entities to eachother */
+
+function addRelated(entity){
+	this.$container;
+	this.$input;
+	this.entity = entity;
+	this.loaded = false;
+	this.body = false;
+	this.init();
+}
+
+/* INIT */
+
+/* init Comments object */
+
+addRelated.prototype.init = function(){
+	this.build();
+}
+
+/* build comments html */
+addRelated.prototype.build = function(){
+	this.$container = $(document.createElement('div')).addClass('content').addClass('content-add').data('content',this);
+}
+/* add Body */
+addRelated.prototype.addBody = function(){
+	this.$input = $('<textarea/>').attr('maxlength','4096');
+	this.$relations = $(document.createElement('div')).addClass('relations');
+	this.$container.append(this.$relations);
+	this.body = true;
+}
+
+	}
+
+	/* Helpers */
+
+	addRelated.prototype.getContainer = function(){
+		return this.$container;
+	}
+
+
+	addRelated.prototype.show = function(){
+		if (!this.body){
+			this.addBody();
+		}
+		if (!this.loaded){
+			this.load();
+		}
+	}
+
+
+	/* DATA */
+
+	addRelated.prototype.load = function(){
+		if (this.loaded){
+			return;
+		}
+
+addRelated.prototype.showContainer = function (){
+	this.$container.velocity('stop').velocity("slideDown",  {
+		queue: false,
+		easing: Global.easing,
+		duration: Global.animationDuration
+	});
+}

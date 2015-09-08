@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>JQuery Thumbnail Gallery With LightBox by Tean</title>
+        
+        <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane_horizontal.css" media="all" />
+		<link rel="stylesheet" type="text/css" href="css/line_horizontal_scroll_widthRestrain.css" />
+
+        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="js/jquery.prettyPhoto.js" charset="utf-8"></script>
+        <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+        <script type="text/javascript" src="js/jquery.func.js"></script>
+        <script type="text/javascript" src="js/jquery.thumbGallery.min.js"></script>
+        <script type="text/javascript">
+		
+			function thumbGallerySetupDone(){
+				//function called when component is ready to receive public function calls
+				//console.log('thumbGallerySetupDone');
+			}
+		
+			function detailActivated(){
+				//function called when prettyphoto is opened
+				//console.log('detailActivated');
+			}
+			
+			function detailClosed(){
+				//function called when prettyphoto is closed
+				//console.log('detailClosed');
+			}
+			
+			function overThumb(i,j){
+				//function called when mouse over thumb holder (plus returned item number: i = first level, j = second level)
+				//console.log('overThumb: ', i,' , ', j);
+			}
+			
+			function outThumb(i, j){
+				//function called when mouse out thumb holder (plus returned item number: i = first level, j = second level)
+				//console.log('outThumb: ', i,' , ', j);
+			}
+			
+			jQuery(document).ready(function($) {
+					  
+				jQuery('#componentWrapper').thumbGallery({	
+					/* GENERAL */
+					/*layoutType: grid/line */
+					layoutType: 'line',
+					/*thumbOrientation: horizontal/vertical */
+					thumbOrientation: 'horizontal',
+					/*moveType: scroll/buttons */
+					moveType: 'scroll',
+					/*scrollOffset: how much to move scrollbar and scrolltrack off the content (enter 0 or above) */
+					scrollOffset: 0,
+					
+					/* GRID SETTINGS */
+					/*verticalSpacing:  */
+					verticalSpacing: 10,
+					/*horizontalSpacing:  */
+					horizontalSpacing: 10,
+					/*buttonSpacing: button spacing from the grid itself */
+					buttonSpacing: 10,
+					/*direction: left2right/top2bottom (direction in which boxes are listed) */
+					direction: 'left2right',
+					
+					/* INNER SLIDESHOW */
+					/*innerSlideshowDelay: slideshow delay for inner items in seconds, random value between: 'min, max', 
+					enter both number the same for equal time delay like for example 2 seconds: '2,2' */
+					innerSlideshowDelay:[2,4],
+					/*innerSlideshowOn: autoplay inner slideshow, true/false */
+					innerSlideshowOn:true
+				});	
+				
+				jQuery("a[data-rel^='prettyPhoto']").prettyPhoto({theme:'pp_default',
+												deeplinking: false, 
+												callback: function(){detailClosed();}/* Called when prettyPhoto is closed */});	
+		   
+		   });
+		   
+        </script>
+	
+  </head>
+  <body>  
+  
+  		<!-- wrapper for the whole component -->
+    	<div id="componentWrapper">
+                 
+              <div class="thumbContainer">
+                    
+                    <div class="thumbInnerContainer">
+                    
+                   		 <div class='thumbHolder'> 
+                             <a class="pp_content" href="http://vimeo.com/14665315" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/01.jpg" width="240" height="155" alt="Vimeo Video" /></a>  
+                             <p class="title">Nulla facilisi</p>
+                             <p class="info">Aenean suscipit libero gravida nulla</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/31.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/31.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/32.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/32.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/33.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/33.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>	                             
+
+                             <p class="title">Integer tellus justo</p>
+                             <p class="info">Suspendisse ullamcorper tristique eros</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+                             <a class="pp_content" href="media/category3/main/03.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/03.jpg" width="240" height="155" alt="Optional image title" /></a>  
+                             <p class="title">Aenean suscipit</p>
+                             <p class="info">Aenean elementum malesuada neque</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+                             <a class="pp_content" href="http://vimeo.com/14665200" data-rel="prettyPhoto[gallery1]" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit."><img class="thumb_hidden" src="media/category3/thumb/240_155/04.jpg" width="240" height="155" alt="Vimeo Video" /></a>  
+                             <p class="title">Praesent erat leo</p>
+                             <p class="info">Curabitur molestie gravida nisi</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/34.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/34.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/35.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/35.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+
+                             <p class="title">Vivamus sodales</p>
+                             <p class="info">Donec imperdiet placerat erat</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/36.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/36.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/37.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/37.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/38.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/38.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>	                             
+
+                             <p class="title">Nulla facilisi</p>
+                             <p class="info">Aenean suscipit libero gravida nulla</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+                             <a class="pp_content" href="http://vimeo.com/14664972" data-rel="prettyPhoto[gallery1]" title="Duis egestas, quam faucibus interdum tincidunt, enim sem tincidunt tellus, sed condimentum tellus tortor ut mi."><img class="thumb_hidden" src="media/category3/thumb/240_155/07.jpg" width="240" height="155" alt="Vimeo Video" /></a>
+                             <p class="title">Quisque orci</p>
+                             <p class="info">Praesent sit amet leo</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+                             <a class="pp_content" href="http://www.youtube.com/watch?v=rcpFo9qcB-4" data-rel="prettyPhoto[gallery1]" title="Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."><img class="thumb_hidden" src="media/category3/thumb/240_155/08.jpg" width="240" height="155" alt="Youtube Video" /></a> 
+                             <p class="title">Integer tellus justo</p>
+                             <p class="info">Suspendisse ullamcorper tristique eros</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/39.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/39.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/40.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/40.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+
+                             <p class="title">Aenean suscipit</p>
+                             <p class="info">Aenean elementum malesuada neque</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+                             <a class="pp_content" href="http://vimeo.com/14665315" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/10.jpg" width="240" height="155" alt="Vimeo Video" /></a> 
+                             <p class="title">Aenean justo arcu</p>
+                             <p class="info">Mauris adipiscing sagittis ipsum</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/41.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/41.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <div class='innerThumbHolder'>
+                                 <a class="pp_content" href="media/category3/main/42.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/42.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <p class="title">Nunc urna libero</p>
+                             <p class="info">Vestibulum varius elementum lectus</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+                             <a class="pp_content" href="media/category3/main/12.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/12.jpg" width="240" height="155" alt="Optional image title" /></a>  
+                             <p class="title">Vivamus sodales</p>
+                             <p class="info">Donec imperdiet placerat erat</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/43.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/43.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <div class='innerThumbHolder'> 
+                                 <a class="pp_content" href="media/category3/main/44.jpg" data-rel="prettyPhoto[gallery1]" title="Optional description in Prettyphoto."><img class="thumb_hidden" src="media/category3/thumb/240_155/44.jpg" width="240" height="155" alt="Optional image title" /></a>                             
+                             </div>
+                             
+                             <p class="title">Nunc nisi turpis</p>
+                             <p class="info">Duis ultrices purus vel mauris</p>
+                         </div>
+                         
+                         <div class='thumbHolder'> 
+                             <a class="pp_content" href="http://www.youtube.com/watch?v=rDb7TMolGfs" data-rel="prettyPhoto[gallery1]" title="Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."><img class="thumb_hidden" src="media/category3/thumb/240_155/14.jpg" width="240" height="155" alt="Youtube Video" /></a>
+                             <p class="title">Praesent erat leo</p>
+                             <p class="info">Curabitur molestie gravida nisi</p>
+                         </div>
+                         
+                    </div>
+                    
+            </div>
+               
+        </div>
+        
+   		<!-- public function calls -->
+    	<div id='publicFunctions'>
+       		<p>PUBLIC METHODS</p><br/>
+            <ul>
+                <!-- start/stop all inner slideshows (true = start, false = stop) -->
+                <li><a href='#' onClick="jQuery.fn.thumbGallery.toggleInnerslideShow(true); return false;">start/stop all inner slideshows</a></li>
+                
+                <!-- start/stop specific inner slideshow (i = item number in html order starting from 0, true = start, false = stop) -->
+                <li><a href='#' onClick="jQuery.fn.thumbGallery.toggleInnerslideShowNum(0, true); return false;">start/stop specific inner slideshow</a></li>
+                
+                <!-- get Thumb Holder (retrun thumb holder, i = item number in html order starting from 0) -->
+                <li><a href='#' onClick="jQuery.fn.thumbGallery.getThumbHolder(i); return false;">get Thumb Holder</a></li>
+            </ul>
+         </div>
+  
+   
+ 
+      </body>
+</html>

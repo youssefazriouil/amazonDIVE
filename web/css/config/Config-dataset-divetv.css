@@ -1,0 +1,206 @@
+
+/*	COLORS */
+
+/*search:black:252a32
+Actor:lblue:32b5c3
+concept:yellow:f1b84d
+object:red:dd3749
+event:purple:ab6cad
+Place:grey:878d94
+time:blue:3b83c5
+narrative:green:5cbc56*/
+
+.entity-color{
+	background-color: #dda;
+}
+
+.entity-Actor .entity-color, .color-Actor, .entity-Concept .entity-color, .color-Concept{
+	background-color: #f1b84d;
+}
+.entity-realPerson .entity-color, .color-realPerson{
+	background-color: #32b5c3;
+}
+
+.entity-fictionalPerson .entity-color, .color-fictionalPerson{
+	background-color: #9CA49D;
+}
+.entity-Image .entity-color, .color-Image{
+	background-color: #dd3749;
+}
+
+.entity-Video .entity-color, .color-Video{
+        background-color: #F59F16;
+}
+
+.entity-realPlace .entity-color, .color-realPlace{
+	background-color: #542D0A;
+}
+.entity-fictionalPlace .entity-color, .color-fictionalPlace{
+        background-color: #721083;
+}
+.entity-realOrganization .entity-color, .color-realOrganization{
+        background-color: #bf8fdb;
+}
+.entity-fictionalOrganization .entity-color, .color-fictionalOrganization{
+        background-color: #ed87b5;
+}
+.entity-Episode .entity-color, .color-Episode{
+        background-color: #1b7a79;
+}
+
+.entity-fictionalEvent .entity-color, .color-fictionalEvent{
+	background-color: #41BF28;
+}
+.entity-Collection .entity-color, .color-Collection{
+	background-color: #5cbc56;
+}
+.entity-Search .entity-color, .color-Search{
+	background-color: #252a32;
+}
+
+.entity-Unknown .entity-color, .color-Unknown{
+	background-color: #7d8a9f;
+}
+
+
+.icon-Search, .entity-Search .icon{
+	background-image: url('../../img/icon-search.png');
+}
+
+.icon-Actor, .entity-Concept .Actor,
+.icon-Concept, .entity-Concept .icon{
+	background-image: url('../../img/icon-concept.png');
+}
+.icon-realPerson, .entity-realPerson .icon{
+	background-image: url('../../img/icon-realPerson.png');
+}
+
+.icon-fictionalPerson, .entity-fictionalPerson .icon{
+        background-image: url('../../img/icon-fictionalPerson.png');
+}
+
+.icon-Image, .entity-Image .icon{
+	background-image: url('../../img/icon-object.png');
+}
+
+.icon-Video, .entity-Video .icon{
+        background-image: url('../../img/icon-vidClip.png');
+}
+
+.icon-realPlace, .entity-realPlace .icon{
+	background-image: url('../../img/icon-realPlace.png');
+}
+.icon-fictionalPlace, .entity-fictionalPlace .icon{
+        background-image: url('../../img/icon-fictionalPlace.png');
+}
+.icon-realOrganization, .entity-realOrganization .icon{
+        background-image: url('../../img/icon-realOrganization.png');
+}
+
+.icon-fictionalOrganization, .entity-fictionalOrganization .icon{
+        background-image: url('../../img/icon-fictionalOrganization.png');
+}
+.icon-Episode, .entity-Episode .icon{
+        background-image: url('../../img/icon-Episode.png');
+}
+
+.icon-fictionalEvent, .entity-fictionalEvent .icon{
+	background-image: url('../../img/icon-event.png');
+}
+.icon-Collection, .entity-Collection .icon{
+	background-image: url('../../img/icon-collection.png');
+}
+
+.icon-Time, .entity-Time .icon{
+	background-image: url('../../img/icon-time.png');
+}
+
+.icon-Data, .entity-Data .icon {
+	background-image: url('../../img/icon-data.png');
+}
+
+.icon-Link, .entity-Link .icon{
+	background-image: url('../../img/icon-link.png');
+}
+
+.icon-details{
+	background-image: url('../../img/icon-details.png');
+}
+
+.icon-comments{
+	background-image: url('../../img/icon-comments.png');
+}
+
+.icon-collections{
+	background-image: url('../../img/icon-collections.png');
+}
+
+.icon-europeana{
+	background-image: url('../../img/icon-europeana.png');
+}
+
+.icon-addrelated{
+	background-image: url('../../img/addFriendIcon.png');
+}
+
+.icon-games{
+        background-image: url('../../img/controllerIcon.png');
+}
+
+.icon-share{
+        background-image: url('../../img/icon-share.png');
+}
+.icon-Related{
+	background-image: url('../../img/icon-related.png');
+}
+
+
+
+.border-Actor,
+.border-Concept{
+	border-color: #f1b84d;
+}
+.border-realPerson{
+	border-color: #32b5c3;
+}
+.border-fictionalPerson{
+        border-color: #9CA49D;
+}
+
+.border-Image{
+	border-color: #dd3749;
+}
+
+.border-Video{
+	border-color: #F59F16;
+}
+.border-realPlace{
+	border-color: #542D0A;
+}
+.border-fictionalPlace{
+        border-color: #721083;
+}
+.border-realOrganization{
+        border-color: #bf8fdb;
+}
+.border-fictionalOrganization{
+        border-color: #ed87b5;
+}
+.border-Episode{
+        border-color: #1b7a79;
+}
+
+.border-fictionalEvent{
+	border-color: #41BF28;
+}
+.border-Collection{
+	border-color: #5cbc56;
+}
+.border-Search{
+	border-color: #252a32;
+}
+
+.border-Link{
+	border-color: rgba(0,0,0,0.4);
+}
+

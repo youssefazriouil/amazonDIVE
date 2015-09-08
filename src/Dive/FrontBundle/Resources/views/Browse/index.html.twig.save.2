@@ -1,0 +1,78 @@
+{% extends 'DiveFrontBundle::layout.html.twig' %}
+{% block content %}
+{% spaceless %}
+<style>
+#search{
+	position:relative;
+	top: -100px;
+}
+</style>
+
+<div id="slidy-container">
+<figure id="slidy">
+        <img src="{{asset('img/sjonnie_sneeuw.png')}}">
+        <img src="{{asset('img/dany_meereen.png')}}">
+        <img src="{{asset('img/casterly_rock.png')}}">
+</figure>
+</div>
+
+<div id="search" class="blackbox">
+
+        <div class="row">
+                <input type="text" placeholder="Start exploring!" id="search-field" />
+                <div id="search-cross"></div>
+        </div>
+
+        <div class="row entity-Search">
+                <div id="search-filter"></div>
+        </div>
+</div>
+
+<div id="browser" class="blackbox">
+</div>
+
+<div id="popup">
+	<h1 class="title">
+	</h1>
+	<div class="body">
+	</div>
+	<div class="buttons">
+	</div>
+</div>
+
+
+<script type="text/javascript" src="/js/vendor/jquery-1.10.2.min.js"></script>
+<script>
+$.getJSON("http://divetv.ops.labs.vu.nl/app.php/vu/api/v2/search?keywords=:",function(data){
+	var episodes = data['data'];
+	var random_episode_nr = Math.floor(Math.random() * (episodes.length));
+	var epimage = episodes[random_episode_nr]['depicted_by']['source'];
+	var epilink = "http://divetv.ops.labs.vu.nl{{ app.request.baseUrl }}/{{dataset}}#browser\\entity\\" + episodes[random_episode_nr]['uid'];
+	$('#episode').attr('src',epimage);
+	$('#epi-link').attr('href',epilink);
+	$('#epi-title').html(episodes[random_episode_nr]['title']);
+
+	$('#episode').hover(function(){
+	$(this).css({outline: '3px solid white'}).animate(500);
+	},
+	function(){
+	$(this).css({outline: 'none'}).animate(500);
+	}
+	);
+
+});
+</script>
+
+<div id="thisEpisode">
+<div id="epmsg">CHECK OUT THIS EPISODE</div>
+<a id="epi-link" href=""><img id="episode" src="" width="350px"><span id="epi-title"></span></a> 
+</div>
+
+<div id="poploc">
+<div id="epmsg">SEE POPULAR LOCATIONS AND CHARACTERS</div>
+MAAK EEN GET REQUEST NAAR EEN NIEUWE CONTROLLER WAARIN JE EEN MYSQL QUERY DOET EN DE IMAGE + TITLE TERUGSTUURT IN EEN RETUTN
+</div>
+
+{% include 'DiveFrontBundle:General:help.html.twig' %}
+{% endspaceless %}
+{% endblock %}

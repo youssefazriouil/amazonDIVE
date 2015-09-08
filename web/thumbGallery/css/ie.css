@@ -1,0 +1,7 @@
+
+/* IE transparent bg hack */
+#componentWrapper .title{
+	background: url(../data/bg.png);
+}
+
+
