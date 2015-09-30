@@ -435,6 +435,24 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             }
 
+            if (0 === strpos($pathinfo, '/entity/get')) {
+                // dive_front_diveentity_getvideostat
+                if ($pathinfo === '/entity/getVideoStat') {
+                    return array (  '_controller' => 'Dive\\FrontBundle\\Controller\\DiveEntityController::getVideoStat',  '_route' => 'dive_front_diveentity_getvideostat',);
+                }
+
+                // dive_front_diveentity_getallvideostat
+                if ($pathinfo === '/entity/getAllVideoStat') {
+                    return array (  '_controller' => 'Dive\\FrontBundle\\Controller\\DiveEntityController::getAllVideoStat',  '_route' => 'dive_front_diveentity_getallvideostat',);
+                }
+
+            }
+
+            // dive_front_diveentity_incrementvideostat
+            if ($pathinfo === '/entity/incrementVideoStat') {
+                return array (  '_controller' => 'Dive\\FrontBundle\\Controller\\DiveEntityController::incrementVideoStat',  '_route' => 'dive_front_diveentity_incrementvideostat',);
+            }
+
         }
 
         if (0 === strpos($pathinfo, '/search/images')) {
@@ -486,22 +504,27 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'dive_front_user_newpassword')), array (  '_controller' => 'Dive\\FrontBundle\\Controller\\UserController::newPasswordAction',));
             }
 
-            if (0 === strpos($pathinfo, '/user/log')) {
-                // login
-                if ($pathinfo === '/user/login') {
-                    return array (  '_controller' => 'Dive\\FrontBundle\\Controller\\SecurityController::loginAction',  '_route' => 'login',);
-                }
+        }
 
-                // logout
-                if ($pathinfo === '/user/logout') {
-                    return array('_route' => 'logout');
-                }
+        // dive_front_videostat_changevideostat
+        if ($pathinfo === '/HOIchangeVideoStat') {
+            return array (  '_controller' => 'Dive\\FrontBundle\\Controller\\VideoStatController::changeVideoStat',  '_route' => 'dive_front_videostat_changevideostat',);
+        }
 
-                // login_check
-                if ($pathinfo === '/user/login_check') {
-                    return array('_route' => 'login_check');
-                }
+        if (0 === strpos($pathinfo, '/user/log')) {
+            // login
+            if ($pathinfo === '/user/login') {
+                return array (  '_controller' => 'Dive\\FrontBundle\\Controller\\SecurityController::loginAction',  '_route' => 'login',);
+            }
 
+            // logout
+            if ($pathinfo === '/user/logout') {
+                return array('_route' => 'logout');
+            }
+
+            // login_check
+            if ($pathinfo === '/user/login_check') {
+                return array('_route' => 'login_check');
             }
 
         }

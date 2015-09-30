@@ -66,7 +66,9 @@ $(window).load(function() {
 });
 
 $(function() {
-		carouseller = new carousel('.carouseller');
+		carouseller0 = new carousel('.carouseller.c0');
+		carouseller1 = new carousel('.carouseller.c1');
+		
 	});
 
 $('#search-field').blur(function(){
@@ -84,7 +86,7 @@ $('#search-field').focus(function(){
 $.getJSON("/dive/web/app.php/vu/api/v2/search?keywords=fragment",function(data){
 	var episodes = data['data'];
 	episodes = episodes.sort(function() { return 0.5 - Math.random() });
-	episodes = episodes.slice(0,9);
+	episodes = episodes.slice(0,10);
 	$.each(episodes, function(i,val){
 		//var random_episode_nr = Math.floor(Math.random() * (episodes.length));
 		var carousel = 'c'+i%2;
@@ -108,8 +110,41 @@ setCarouselItem = function(carouselnumber, val){
                 var epititle = val['title'];
                 var uid = val['uid'];
                 var desc = val['description'];
-                $("."+carouselnumber+" .carousel-items").append("<a href='"+epilink+"'><div class='carousel-block'><img src='"+epimage+"' width='320px' height='180px' /><br><span class='itemTitle'>"+epititle+"</span><div id='itemDesc' style='display:none;'>"+desc+"</div></div></a>");
+		var url = val['depicted_by']['source'];
+		$.post("/dive/web/app_dev.php/entity/getAllVideoStat?videoUrl="+url, function(data){
+			t_clicked = data['data'][0]['t_clicked'];
+			t_shared_twitter = data['data'][0]['t_shared_twitter'];
+			t_pinned_pinterest = data['data'][0]['t_pinned_pinterest'];
+			$("."+carouselnumber+" .carousel-items").append("<div class='carousel-block'><a href='"+epilink+"'><img src='"+epimage+"' width='320px'height='180px' /><br><span class='itemTitle'>"+epititle+"</span></a><div class='videoStats'><span class='clicks'><img src='{{asset('img/cursor.png') }}' />"+t_clicked+"</span><span class='twitter_shares'><img src='{{asset('img/twitter_shared.png')}}' />"+t_shared_twitter+"</span><span class='pinterest_pins'><img src='{{asset('img/pinterest.png')}}' />"+t_pinned_pinterest+"</span></div><div id='itemDesc' style='display:none;'>"+desc+"</div><div id='videoSrc' style='display:none;'>"+url+"</div></div>");
+		});
+                //$("."+carouselnumber+" .carousel-items").append("<div class='carousel-block'><a href='"+epilink+"'><img src='"+epimage+"' width='320px' height='180px' /><br><span class='itemTitle'>"+epititle+"</span><div id='itemDesc' style='display:none;'>"+desc+"</div></a></div>");
 }
+
+function incrementVideoStat(videoSrc,service){
+	url = "/dive/web/app_dev.php/entity/incrementVideoStat?videoUrl="+videoSrc+"&service="+service;
+        console.log(url);
+        $.post(url, function(data){
+        });
+
+}
+
+//als een video geklikt wordt, verhoog dan de videostats
+$(window).load(function(){
+	$('.carousel-block  a').click(function(e){
+		//e.preventDefault();
+		var videoSrc = $(this).parent().find('#videoSrc').text();
+		incrementVideoStat(videoSrc,'click');
+		//return false;
+	});
+	//Als een entity getweet wordt, verhoog dan de stats
+	/*$('button').click(function(e){
+		e.prventDefault();
+		var title = $(this).closest('.entity-Video').find('.title').attr('title');
+		alert(title);
+	});*/
+});
+
+
 /*
 //get most popular entity
 function getMostPopularEntities(amount){
@@ -133,7 +168,7 @@ function dataCallback(data){
 			var title = data['data'][0]['title'];
 			var uid = data['data'][0]['uid'];
 			var desc = data['data'][0]['description'];
-			$('.carousel-items').append("<a href='{{ app.request.baseUrl }}/vu#browser\\entity\\"+uid+"'><div class='carousel-block'><img src='"+ent_plch+"' width='200px' height='200px' /><br><span class='itemTitle'>"+title+"</span><div id='itemDesc' style='display:none;'>"+desc+"</div></div></a>");
+			$('.carousel-items').append("<a test="hoi" href='{{ app.request.baseUrl }}/vu#browser\\entity\\"+uid+"'><div class='carousel-block'><img src='"+ent_plch+"' width='200px' height='200px' /><br><span class='itemTitle'>"+title+"</span><div id='itemDesc' style='display:none;'>"+desc+"</div></div></a>");
 			
 			$('#location').attr('src',ent_img);
 		
@@ -162,7 +197,8 @@ getMostPopularEntities(10);
                         var list = data['data'];
 			$.each(list,function(element,value){
 				if(list[element]['details'].indexOf('http') > -1){
-					var url = Global.APIPath + 'entity/details?id=' + list[element]['details'].substring(list[element]['details'].lastIndexOf('http'));
+					var url = '/dive/web/app_dev.php/vu/api/v2/entity/details?id=' + list[element]['details'].substring(list[element]['details'].lastIndexOf('http'));
+					//alert(url);
 					$.get(url,function(data){
 						//console.log(JSON.stringify(data));
 						var title = data['data'][0]['title'];
@@ -196,12 +232,22 @@ getMostPopularEntities(10);
 </div>
 
 <div class="events">
-<div id="call2act">Start by checking out these events:</div>
+	<div id="call2act">Start by checking out these events:</div>
 <div id="figures">
 <div class="fpevent">
 <a href="{{ app.request.baseUrl }}/#browser\entity\http://divetv.ops.labs.vu.nl/entity/got-ficev-BattleOfBlackwater"><img src="/dive/web/img/frontpage-events/blackwater.jpg"/></a>
 <div class="caption">Battle at Blackwater Bay</div>
-</div>	
+	<div class="extra">
+		<h1>The Battle at Blackwater</h1>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/TI5sFhL-iSE" frameborder="0" allowfullscreen></iframe>
+		"Blackwater" is the ninth and penultimate episode of the second season of HBO's medieval fantasy television series Game of Thrones. The episode is written by George R. R. Martin, the author of the A Song of Ice and Fire novels of which the series is an adaptation, and directed by Neil Marshall. It aired on May 27, 2012.
+
+The entire episode is dedicated to the climactic Battle of the Blackwater, in which the Lannister army, commanded by acting Hand of the King Tyrion Lannister, defends the city of King's Landing as Stannis Baratheon's fleet stages an attack at Blackwater Bay. Unlike all previous episodes, "Blackwater" does not follow the parallel storylines of the characters outside of King's Landing.
+	<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=battle%20blackwater" data-widget-id="644512747510702080">Tweets over battle blackwater</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	
+	</div><!-- end extra -->
+ </div><!-- end fpevent -->
 
 <div class="fpevent">
 <a href="{{ app.request.baseUrl }}/#browser\entity\http://divetv.ops.labs.vu.nl/entity/got-ficev-ThePurpleWedding"><img src="/dive/web/img/frontpage-events/purplewedding.jpg"/></a>
@@ -224,8 +270,9 @@ getMostPopularEntities(10);
 </div>
 
 </div><!-- end figures frontpage -->
+</div><!--end events -->
 
-</div>
+
 
 <script>
 $('.fpevent a').hover(function(){
@@ -238,9 +285,9 @@ $('.fpevent a').hover(function(){
 
 </script>
 
-<div class="carouseller row-fluid for-car">
+<div class="carouseller c0 row-fluid for-car">
 
-  <div class="carousel-wrapper c0">
+  <div class="carousel-wrapper">
     <div class="carouselTitle">Earn points by describing/verifying descriptions of these videos:</div>
     <div class="carousel-items">
     </div><!--end carousel-items-->
@@ -251,10 +298,13 @@ $('.fpevent a').hover(function(){
   </div>
 </div>
 
-<div class="carouseller row-fluid for-car">
 
-  <div class="carousel-wrapper c1">
-    <div class="carouselTitle">Placeholder for tag campaign</div>
+<div class="carouseller c1 row-fluid for-car">
+
+  <div class="carousel-wrapper">
+    <div class="carouselTitle">The latest Tag campaign!</div>
+    <div class="carouselUnderTitle">Earn double the points while you still can.</div>
+    <div class="callToTag">
     <div class="carousel-items">
     </div><!--end carousel-items-->
   </div><!--end carousel-wrapper-->
@@ -262,8 +312,10 @@ $('.fpevent a').hover(function(){
     <div class="carousel-button-left shadow"><a href="javascript:void(0)">‹</a></div>
     <div class="carousel-button-right shadow"><a href="javascript:void(0)">›</a></div>
   </div>
+</div> <!--end call to tag -->
 </div>
 <!--end carousellers-->
+
 
 <script type="text/javascript" src="{{asset('js/jquery.qtip.js') }}"></script>
 <script>
@@ -274,7 +326,7 @@ $(window).load(function () {
 	$( ".carousel-block" ).each(function(i){
                 $(this).qtip({
                                 content: {
-                                        text: $(this).children('#itemDesc')
+                                        text: $(this).find('#itemDesc')
                                 },
     				style: {
         				tip: {

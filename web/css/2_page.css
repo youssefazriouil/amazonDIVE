@@ -59,6 +59,7 @@ a, a:visited{
 #content{
 	min-height: 100%;
 	position: relative;
+	margin-top:30px;
 }
 
 a{

@@ -88,10 +88,13 @@ addRelated.prototype.addBody = function(){
 		    $('.relsearchresult button').click(function(){
                         	//alert('button clicked1: '+$(this).parent().find('#rel_uids').text());
 				uids = $(this).parent().find('#rel_uids').text();
-				curr_ent = uids.substr(0, uids.indexOf('|'));
-				new_rel = uids.substr(uids.indexOf('|')+1);
+				curr_ent_uid = uids.substr(0, uids.indexOf('|'));
+				new_rel_uid = uids.substr(uids.indexOf('|')+1);
 				//alert(current_entity);
-				that.submitRelation(curr_ent,new_rel);
+				$.post("/dive/web/app_dev.php/vu/api/v2/entity/details?id="+new_rel_uid,function(data){
+					new_rel_title = data['data'][0]['title'];
+					that.submitRelation(curr_ent_uid,new_rel_uid, current_entity, new_rel_title);
+				});
                     });
 
 		  } //end if enter pressed
@@ -106,9 +109,9 @@ addRelated.prototype.addBody = function(){
 	
 /* Suggest new entity information */
 
-addRelated.prototype.submitRelation = function(ce,nr){
+addRelated.prototype.submitRelation = function(ce,nr,cet,nrt){
 	
-	var $form = $("<div>How are <b>"+ce+"</b> and <b>"+nr+"</b> related?<br><br>The entities are related by:<select name='reasons'><option value='character'>Character/Actor</option><option value='event'>Event</option><option value='place'>Place</option><option value='org'>House or Organization</option><option value='death'>Killed by</option><option value='other'>Other</option></select><br>Namely:<textarea name='detailedReason'></textarea></div>");
+	var $form = $("<div>How are <b>"+cet+"</b> and <b>"+nrt+"</b> related?<br><br>The entities are related by:<select name='reasons'><option value='character'>Character/Actor</option><option value='event'>Event</option><option value='place'>Place</option><option value='org'>House or Organization</option><option value='death'>Killed by</option><option value='other'>Other</option></select><br>Namely:<textarea name='detailedReason'></textarea></div>");
 
 	var popup= new Popup('Submit new relation',
 		$form.html(),
@@ -127,8 +130,9 @@ addRelated.prototype.submitRelation = function(ce,nr){
 					var newDescription = $('#popup .entity-description').val();
 					var checkId = this.entity.getUID();
 					Global.browser.updateEntity(checkId,newTitle,newDescription,newType);
-					AjaxLog.info('Improve Entity',JSON.stringify({'uid': this.entity.getUID(), 'type':newType, 'title':newTitle, 'description':newDescription }));
-
+					//logDetails = JSON.stringify({'uid': checkId, 'type':newType, 'title':newTitle, 'description':newDescription });
+					//alert(logDetails);
+					AjaxLog.info('Improve Entity: '+cet,checkId);
 					Global.user.refresh();
 					$(window).trigger('popup-hide');
 				}.bind(this)

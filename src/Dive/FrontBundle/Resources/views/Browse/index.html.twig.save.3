@@ -1,0 +1,337 @@
+ 
+{% extends 'DiveFrontBundle::layout.html.twig' %}
+{% block content %}
+{% spaceless %}
+
+<!--<div class="gallery autoplay items-3">
+  <div id="item-1" class="control-operator"></div>
+  <div id="item-2" class="control-operator"></div>
+  <div id="item-3" class="control-operator"></div>
+
+  <figure class="item">
+    <img src="{{asset('img/banners/banner2.jpg')}}">
+  </figure>
+
+  <figure class="item">
+    <img src="{{asset('img/banners/banner3.jpg')}}">
+  </figure>
+
+  <figure class="item">
+    <img src="{{asset('img/banners/banner4.jpg')}}">
+  </figure>
+
+
+  <div class="controls">
+    <a href="#item-1" class="control-button">•</a>
+    <a href="#item-2" class="control-button">•</a>
+    <a href="#item-3" class="control-button">•</a>
+ 
+</div>
+</div>-->
+
+<div id="search" class="blackbox">
+
+        <div class="row entity-Search">
+                <div id="search-filter"></div>
+        </div>
+</div>
+
+<div id="browser" class="blackbox">
+</div>
+
+<div id="popup">
+	<h1 class="title">
+	</h1>
+	<div class="body">
+	</div>
+	<div class="buttons">
+	</div>
+</div>
+
+
+<script type="text/javascript" src="{{asset('js/vendor/jquery-1.10.2.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/vendor/jquery-ui-1.10.4.min.js') }}"></script>
+<script type="text/javascript" src="{{asset('jQueryCarousel/dist/carouseller.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/jquery.qtip.js') }}"></script>
+
+
+<script type="text/javascript">
+
+$(window).load(function() {
+	setTimeout(function(){
+		if($('#search-field').val() != ''){
+                	$('#search-field').css('width','200px');
+        	}
+	}, 1000);
+});
+
+$(function() {
+		carouseller0 = new carousel('.carouseller.c0');
+		carouseller1 = new carousel('.carouseller.c1');
+		
+	});
+
+$('#search-field').blur(function(){
+	if($(this).val() == ''){
+                $('#search-field').animate({width:'-=200px'},'slow');
+        }
+});
+
+$('#search-field').focus(function(){
+	if($(this).val() == ''){
+		 $('#search-field').animate({width:'+=200px'},'slow');
+	}
+});
+
+$.getJSON("/dive/web/app.php/vu/api/v2/search?keywords=fragment",function(data){
+	var episodes = data['data'];
+	episodes = episodes.sort(function() { return 0.5 - Math.random() });
+	episodes = episodes.slice(0,10);
+	$.each(episodes, function(i,val){
+		//var random_episode_nr = Math.floor(Math.random() * (episodes.length));
+		var carousel = 'c'+i%2;
+		setCarouselItem(carousel,val);	
+		
+	});
+	
+		$('#episode').hover(function(){
+			$(this).css({outline: '3px solid white'}).animate(500);
+		},
+		function(){
+			$(this).css({outline: 'none'}).animate(500);
+		}
+		);
+
+});
+
+setCarouselItem = function(carouselnumber, val){
+		var epimage = val['depicted_by']['placeholder'];
+                var epilink = "{{ app.request.baseUrl }}/{{dataset}}#browser\\entity\\" + val['uid'];
+                var epititle = val['title'];
+                var uid = val['uid'];
+                var desc = val['description'];
+                $("."+carouselnumber+" .carousel-items").append("<div class='carousel-block'><a href='"+epilink+"'><img src='"+epimage+"' width='320px' height='180px' /><br><span class='itemTitle'>"+epititle+"</span><div id='itemDesc' style='display:none;'>"+desc+"</div></a></div>");
+}
+/*
+//get most popular entity
+function getMostPopularEntities(amount){
+	$.post('/dive/web/app_dev.php/' + 'entity/mostPopular', {
+				amount: amount
+	       }, function(data){
+				//console.log(JSON.stringify(data));
+				dataCallback(data);  
+		  }.bind(this)
+	);
+}
+function dataCallback(data){ 
+	//console.log("this is the data:");
+	$.each(data['data'],function(i,entity){
+		//console.log('this entity is: '+JSON.stringify(entity));
+		uid = entity['entity_uid'];
+		//var voteCount = entity['voteCount'];
+		$.getJSON("/dive/web/app_dev.php/vu/api/v2/entity/details?id="+uid,function(data){
+			var ent_img = data['data'][0]['depicted_by']['source'];
+			var ent_plch = data['data'][0]['depicted_by']['placeholder'];
+			var title = data['data'][0]['title'];
+			var uid = data['data'][0]['uid'];
+			var desc = data['data'][0]['description'];
+			$('.carousel-items').append("<a test="hoi" href='{{ app.request.baseUrl }}/vu#browser\\entity\\"+uid+"'><div class='carousel-block'><img src='"+ent_plch+"' width='200px' height='200px' /><br><span class='itemTitle'>"+title+"</span><div id='itemDesc' style='display:none;'>"+desc+"</div></div></a>");
+			
+			$('#location').attr('src',ent_img);
+		
+			$('#poploclink #loc-title').text(data['data'][0]['title'] + " ("+voteCount+")");
+			var epilink = "{{ app.request.baseUrl }}/{{dataset}}#browser\\entity\\" + uid;
+			$('#poploclink').attr('href',epilink);
+	
+			$('#location').hover(function(){
+	        		$(this).css({outline: '3px solid white'}).animate(500);
+      		  		},
+        			function(){
+	        			$(this).css({outline: 'none'}).animate(500);
+	        		}
+			);
+
+
+		});
+	});
+
+}
+getMostPopularEntities(10);
+*/
+
+	$.get('/dive/web/app_dev.php/' + 'ajaxlog/loadActivity', function(data){
+			 //console.log(JSON.stringify(data));
+                        var list = data['data'];
+			$.each(list,function(element,value){
+				if(list[element]['details'].indexOf('http') > -1){
+					var url = Global.APIPath + 'entity/details?id=' + list[element]['details'].substring(list[element]['details'].lastIndexOf('http'));
+					//alert(url);
+					$.get(url,function(data){
+						//console.log(JSON.stringify(data));
+						var title = data['data'][0]['title'];
+						var url = "{{ app.request.baseUrl }}/{{dataset}}#browser\\entity\\" + list[element]['details'];
+						$('#activity-table').append("<li>"+list[element]['action']+":   <a href='"+url+"'>"+title+"</a></li>");
+						
+					});
+				}
+				else{
+					//alert(JSON.stringify(list[element]));
+					$('#activity-table').append("<li><td>"+list[element]['action']+":  "+list[element]['details']+"</li>");
+				}
+			});
+			$(function() {
+  				$('#activity-ticker').vTicker({
+							speed: 500,
+							pause: 5000,
+							mousePause: false
+						      });
+			});
+                  }.bind(this)
+        );
+
+
+
+</script>
+
+<div id="homepage">
+
+<div id="activity-ticker">
+<ul id="activity-table">
+</ul>
+</div>
+
+<div class="events">
+<div id="call2act">Start by checking out these events:</div>
+<div id="figures">
+<div class="fpevent">
+<a href="{{ app.request.baseUrl }}/#browser\entity\http://divetv.ops.labs.vu.nl/entity/got-ficev-BattleOfBlackwater"><img src="/dive/web/img/frontpage-events/blackwater.jpg"/></a>
+<div class="caption">Battle at Blackwater Bay</div>
+</div>	
+
+<div class="fpevent">
+<a href="{{ app.request.baseUrl }}/#browser\entity\http://divetv.ops.labs.vu.nl/entity/got-ficev-ThePurpleWedding"><img src="/dive/web/img/frontpage-events/purplewedding.jpg"/></a>
+<div class="caption">The Purple Wedding</div>
+</div>
+
+<div class="fpevent">
+<a href="{{ app.request.baseUrl }}/#browser\entity\http://divetv.ops.labs.vu.nl/entity/got-ficev-BattleofCastleBlack"><img src="/dive/web/img/frontpage-events/castleblack.jpg"/></a>
+<div class="caption">Battle at Castle Black</div>
+</div>
+
+<div class="fpevent">
+<a href="{{ app.request.baseUrl }}/#browser\entity\http://divetv.ops.labs.vu.nl/entity/got-ficev-TheRedWedding"><img src="/dive/web/img/frontpage-events/redwedding.jpg"/></a>
+<div class="caption">The Red Wedding</div>
+</div>
+
+<div class="fpevent">
+<a href="{{ app.request.baseUrl }}/#browser\entity\http://divetv.ops.labs.vu.nl/entity/got-ficev-MountainAndViper"><img src="/dive/web/img/frontpage-events/mountainandviper.jpg"/></a>
+<div class="caption">Duel of the Mountain and the Viper</div>
+</div>
+
+</div><!-- end figures frontpage -->
+
+</div>
+
+<script>
+$('.fpevent a').hover(function(){
+                $(this).children('img').css({outline: '3px solid white'});
+        },
+        function(){
+                $(this).children('img').css({outline: 'none'});
+        }
+        );
+
+</script>
+
+<div class="carouseller c0 row-fluid for-car">
+
+  <div class="carousel-wrapper">
+    <div class="carouselTitle">Earn points by describing/verifying descriptions of these videos:</div>
+    <div class="carousel-items">
+    </div><!--end carousel-items-->
+  </div><!--end carousel-wrapper-->
+ <div class="carousel-control-block">
+    <div class="carousel-button-left shadow"><a href="javascript:void(0)">‹</a></div>
+    <div class="carousel-button-right shadow"><a href="javascript:void(0)">›</a></div>
+  </div>
+</div>
+
+<div class="carouseller c1 row-fluid for-car">
+
+  <div class="carousel-wrapper">
+    <div class="carouselTitle">Placeholder for tag campaign</div>
+    <div class="carousel-items">
+    </div><!--end carousel-items-->
+  </div><!--end carousel-wrapper-->
+ <div class="carousel-control-block">
+    <div class="carousel-button-left shadow"><a href="javascript:void(0)">‹</a></div>
+    <div class="carousel-button-right shadow"><a href="javascript:void(0)">›</a></div>
+  </div>
+</div>
+<!--end carousellers-->
+
+<script type="text/javascript" src="{{asset('js/jquery.qtip.js') }}"></script>
+<script>
+$(window).load(function () {
+	$.getScript('http://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.js')
+	.done(function(){
+	
+	$( ".carousel-block" ).each(function(i){
+                $(this).qtip({
+                                content: {
+                                        text: $(this).find('#itemDesc')
+                                },
+    				style: {
+        				tip: {
+            					corner: 'left top'
+        				}
+    				}
+                });
+        });
+
+	});//end done
+});
+
+</script>
+
+<!--<div id="centerlogo">
+<a href="http://www.crowddriven.nl"><img src="{{asset('img/CDTag.png')}}"></a>
+</div>
+<div id="callToTag">DIVE deeper into CrowDDriven by playing some games!</div>
+
+
+<table id="layer3">
+<tr>
+<td>
+<div id="game_leaderboard">
+	<div class="goToPlay">
+		<a href="http://ec2-54-93-224-169.eu-central-1.compute.amazonaws.com:8080/campaign.html"><img src="{{asset('img/arya_playgame.png')}}"></a>
+	</div>
+</td>
+
+<td>
+	<div id="leaderboard">
+		<table>
+			<tr><th>Member</th><th>Score</th><tr>
+			<tr><td>Ege9000</td><td>987</td></tr>
+			<tr><td>deMarquiz</td><td>654</td></tr>
+			<tr><td>Diegemen</td><td>321</td></tr>
+
+		</table>
+	</div>
+</td>
+<td>
+
+	<div class="goToPlay">
+                <a href="http://ec2-54-93-224-169.eu-central-1.compute.amazonaws.com:8080/campaign.html"><img src="{{asset('img/nedd_playgame.png')}}"></a>
+        </div>
+</td></tr>
+</table>
+-->
+</div>
+
+</div>
+
+{% include 'DiveFrontBundle:General:help.html.twig' %}
+{% endspaceless %}
+{% endblock %}

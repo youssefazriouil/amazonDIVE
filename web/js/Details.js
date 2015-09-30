@@ -1,4 +1,4 @@
-/* Contentview for details is used to show description, sources, relations of an entity */
+	/* Contentview for details is used to show description, sources, relations of an entity */
 
 function Details(entity){
 	this.$container;
@@ -218,10 +218,26 @@ Details.prototype.addContents = function(){
 		this.$action.append(
 			$(document.createElement('button')).addClass('ok twitter').text('Share on Twitter').click(
 				function(){
+					var videoSrc = this.entity.data.depicted_by.source;
+					incrementVideoStat(videoSrc,'twitter');
 					window.open('https://twitter.com/intent/tweet?text=Check out this DIVE entity: ' + encodeURIComponent(Global.hashPath.getUrlForEntity(this.entity)));
 				}.bind(this)
 				)
 			);
+
+		// normal entity
+                this.$action.append(
+                        $(document.createElement('button')).addClass('delete pinterest').text('Pin on Pinterest').click(
+                                function(){
+					url = Global.basePath + "#browser\\entity\\" + this.entity.getUID();
+					source = this.entity.data.depicted_by.source;
+					title = this.entity.getTitle();
+					incrementVideoStat(source,'pinterest');
+                                        window.open("http://pinterest.com/pin/create/button/?url="+url+"&media="+source+"&description="+title+"");
+                                }.bind(this)
+                                )
+                        );
+
 
 
 	// relations

@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DiveEntityController extends BaseController
 {
-    
+
 
      /**
      * @Route("/mostPopular")
@@ -31,14 +31,13 @@ class DiveEntityController extends BaseController
         $em = $this->getDoctrine()->getManager();
 	$repository = $this ->getRepo('Comment');
 	//$query = $em->createQuery("select r from Comment r where r.type='fictionalPerson' order by r.votecount desc limit 1");
-	
 	$query = $repository->createQueryBuilder('p')
     	 // ->where("p.type = :entityType")
     	  ->orderBy('p.voteCount', 'DESC')
 	  ->setMaxResults($entityAmount)
 	  //->setParameter('entityType',$entityType)
     	  ->getQuery();
-	
+
 	$queryResult = $query->getResult();
 	$result = array(
             'success'=>true,
@@ -96,7 +95,7 @@ class DiveEntityController extends BaseController
             );
         return $this->getJSONResponse($result);
     }
-     
+
     /**
      * @Route("/getDesc")
      */
@@ -115,7 +114,7 @@ class DiveEntityController extends BaseController
             );
         return $this->getJSONResponse($result);
 	}
- 
+
      /**
      * @Route("/comments")
      */
@@ -223,5 +222,93 @@ class DiveEntityController extends BaseController
         }
         return $this->getJSONResponse($result);
     }
+
+    /**
+     * @Route("/getVideoStat")
+     */
+    public function getVideoStat()
+    {
+        $videoUrl = $this->getRequest()->get('videoUrl',0);
+        $service = $this->getRequest()->get('service',0);
+        switch($service){
+                case 'click':
+                $service = "t_clicked"; break;
+                case 'twitter':
+                $service = "t_shared_twitter"; break;
+                case 'pinterest':
+                $service = "t_pinned_pinterest"; break;
+        }
+
+	$em = $this->getDoctrine()->getEntityManager();
+   	$conn = $em->getConnection();
+	//$query = "select ".$service." from videoFragments where videoUrl='".$videoUrl."'";
+	$sql = $conn->prepare("select ".$service." from videoFragments where videoUrl=:videoUrl");
+	//$sql->bindValue("service",$service);
+	$sql->bindValue('videoUrl',$videoUrl);
+	$sql->execute();
+	$queryResult = $sql->fetchAll();
+
+        $result = array(
+         'success'=>true,
+         'data'=>$queryResult
+        );
+        return $this->getJSONResponse($result);
+     }
+
+
+    /**
+     * @Route("/getAllVideoStat")
+     */
+    public function getAllVideoStat()
+    {
+        $videoUrl = $this->getRequest()->get('videoUrl',0);
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $conn = $em->getConnection();
+        $sql = $conn->prepare("select t_clicked,t_shared_twitter, t_pinned_pinterest from videoFragments where videoUrl=:videoUrl");
+        $sql->bindValue('videoUrl',$videoUrl);
+        $sql->execute();
+        $queryResult = $sql->fetchAll();
+
+	$result = array(
+         'success'=>true,
+         'data'=>$queryResult
+        );
+        return $this->getJSONResponse($result);
+    }
+
+
+
+     /**
+     * @Route("/incrementVideoStat")
+     */
+    public function incrementVideoStat()
+    {
+        $videoUrl = $this->getRequest()->get('videoUrl',0);
+        $service = $this->getRequest()->get('service',0);
+        switch($service){
+                case 'click':
+                $service = "t_clicked"; break;
+                case 'twitter':
+                $service = "t_shared_twitter"; break;
+                case 'pinterest':
+                $service = "t_pinned_pinterest"; break;
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $conn = $em->getConnection();
+        $sql = $conn->prepare("UPDATE videoFragments SET ".$service." =  ".$service." + 1 where videoUrl=:videoUrl");
+        //$sql->bindValue("service",$service);
+        $sql->bindValue('videoUrl',$videoUrl);
+        $sql->execute();
+
+	$result = array(
+         'success'=>true,
+         'data'=>$service." is incremented by 1"
+        );
+        return $this->getJSONResponse($result);
+
+    }
+
 
 }
