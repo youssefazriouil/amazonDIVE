@@ -56,16 +56,16 @@
   <body class="{% block bodyClass %}{% endblock %}">
     {% block page %}
      <div id="topbar">
-      <img src="{{ asset('img/CDD.png') }}" id="logo" onclick="document.location.href = '{{ app.request.baseUrl }}'; return false;">
+      <!--<img src="{{ asset('img/CDD.png') }}" id="logo" onclick="document.location.href = '{{ app.request.baseUrl }}'; return false;">-->
      <div class="row">
                 <input type="text" placeholder="Start exploring!" id="search-field" />
                 <div id="search-cross"></div>
       </div>
 
-      <div id="log"></div>
+      <!--<div id="log"></div>
       <div id="collections-button"  class="button" title="Collections"></div>
       <div id="user-button"  class="button" title="Registered users"></div>
-      <div id="help-button" class="button" title="Help"></div>
+      <div id="help-button" class="button" title="Help"></div>-->
     </div>
     <div class="colorbar">
         <span id="red" class="colors"></span><span id="darkblue" class="colors"></span><span id="yellow" class="colors"></span><span id="lightblue" class="colors"></span>
@@ -82,14 +82,14 @@
       	{% block content %}{% endblock %}
     </div>
     
-    <img src="{{asset('img/footercolorbar.png')}}" id="footercolorbar">
-    <div id="footer">
+    <!--<img src="{{asset('img/footercolorbar.png')}}" id="footercolorbar">-->
+    <!--<div id="footer">
       {% block footer %}
 	<img src="{{ asset('img/CDD.png') }}" id="logo" class="logofooter" onclick="document.location.href = '{{ app.request.baseUrl }}'; return false;">
 	<center>©2015 - Designed by CrowDDriven</center>
 	<a href="http://wm.cs.vu.nl/"><img src="{{asset('img/logo-vu.png')}}" id="vulogo"></a>
       {% endblock %}
-    </div>
+    </div>-->
     {% endblock %}
 
     {# load config #}

@@ -224,21 +224,21 @@ class __TwigTemplate_bcc83a95b97aaa510cf253d5ac920fd1bac85c544204c214a57f172cae9
     {
         // line 58
         echo "     <div id=\"topbar\">
-      <img src=\"";
+      <!--<img src=\"";
         // line 59
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/CDD.png"), "html", null, true);
         echo "\" id=\"logo\" onclick=\"document.location.href = '";
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
-        echo "'; return false;\">
+        echo "'; return false;\">-->
      <div class=\"row\">
                 <input type=\"text\" placeholder=\"Start exploring!\" id=\"search-field\" />
                 <div id=\"search-cross\"></div>
       </div>
 
-      <div id=\"log\"></div>
+      <!--<div id=\"log\"></div>
       <div id=\"collections-button\"  class=\"button\" title=\"Collections\"></div>
       <div id=\"user-button\"  class=\"button\" title=\"Registered users\"></div>
-      <div id=\"help-button\" class=\"button\" title=\"Help\"></div>
+      <div id=\"help-button\" class=\"button\" title=\"Help\"></div>-->
     </div>
     <div class=\"colorbar\">
         <span id=\"red\" class=\"colors\"></span><span id=\"darkblue\" class=\"colors\"></span><span id=\"yellow\" class=\"colors\"></span><span id=\"lightblue\" class=\"colors\"></span>
@@ -266,16 +266,16 @@ class __TwigTemplate_bcc83a95b97aaa510cf253d5ac920fd1bac85c544204c214a57f172cae9
         // line 83
         echo "    </div>
     
-    <img src=\"";
+    <!--<img src=\"";
         // line 85
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/footercolorbar.png"), "html", null, true);
-        echo "\" id=\"footercolorbar\">
-    <div id=\"footer\">
+        echo "\" id=\"footercolorbar\">-->
+    <!--<div id=\"footer\">
       ";
         // line 87
         $this->displayBlock('footer', $context, $blocks);
         // line 92
-        echo "    </div>
+        echo "    </div>-->
     ";
     }
 

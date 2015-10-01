@@ -371,6 +371,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
                 \$(this).children('img').css({outline: 'none'});
         }
         );
+//\$('#tagcampaign').load('ec2-52-28-200-8.eu-central-1.compute.amazonaws.com:8080/tagcampaign.html #channel1');
 
 </script>
 
@@ -388,7 +389,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 </div>
 
 
-<div class=\"carouseller c1 row-fluid for-car\">
+<!--<div class=\"carouseller c1 row-fluid for-car\">
 
   <div class=\"carousel-wrapper\">
     <div class=\"carouselTitle\">The latest Tag campaign!</div>
@@ -404,10 +405,14 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 </div> <!--end call to tag -->
 </div>
 <!--end carousellers-->
+-->
 
+<div id=\"tagcampaign\">
+<iframe width='100%' scrolling='no' src=\"http://ec2-52-28-200-8.eu-central-1.compute.amazonaws.com:8080/tagcampaign.html\"></iframe>
+</div>
 
 <script type=\"text/javascript\" src=\"";
-        // line 320
+        // line 325
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/jquery.qtip.js"), "html", null, true);
         echo "\"></script>
 <script>
@@ -435,7 +440,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
 <!--<div id=\"centerlogo\">
 <a href=\"http://www.crowddriven.nl\"><img src=\"";
-        // line 345
+        // line 350
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/CDTag.png"), "html", null, true);
         echo "\"></a>
 </div>
@@ -448,7 +453,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 <div id=\"game_leaderboard\">
 \t<div class=\"goToPlay\">
 \t\t<a href=\"http://ec2-54-93-224-169.eu-central-1.compute.amazonaws.com:8080/campaign.html\"><img src=\"";
-        // line 355
+        // line 360
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/arya_playgame.png"), "html", null, true);
         echo "\"></a>
 \t</div>
@@ -469,7 +474,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
 \t<div class=\"goToPlay\">
                 <a href=\"http://ec2-54-93-224-169.eu-central-1.compute.amazonaws.com:8080/campaign.html\"><img src=\"";
-        // line 373
+        // line 378
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/nedd_playgame.png"), "html", null, true);
         echo "\"></a>
         </div>
@@ -481,7 +486,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 </div>
 
 ";
-        // line 382
+        // line 387
         $this->env->loadTemplate("DiveFrontBundle:General:help.html.twig")->display($context);
         echo trim(preg_replace('/>\s+</', '><', ob_get_clean()));
     }
@@ -498,6 +503,6 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
     public function getDebugInfo()
     {
-        return array (  485 => 382,  473 => 373,  452 => 355,  439 => 345,  411 => 320,  356 => 268,  348 => 263,  340 => 258,  332 => 253,  314 => 238,  276 => 205,  242 => 176,  234 => 171,  174 => 118,  160 => 109,  103 => 55,  99 => 54,  95 => 53,  91 => 52,  56 => 20,  49 => 16,  42 => 12,  33 => 5,  31 => 4,  28 => 3,);
+        return array (  490 => 387,  478 => 378,  457 => 360,  444 => 350,  416 => 325,  356 => 268,  348 => 263,  340 => 258,  332 => 253,  314 => 238,  276 => 205,  242 => 176,  234 => 171,  174 => 118,  160 => 109,  103 => 55,  99 => 54,  95 => 53,  91 => 52,  56 => 20,  49 => 16,  42 => 12,  33 => 5,  31 => 4,  28 => 3,);
     }
 }
