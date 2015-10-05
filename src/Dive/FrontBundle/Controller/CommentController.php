@@ -19,13 +19,48 @@ use Dive\FrontBundle\Entity\DiveEntity;
 
 class CommentController extends BaseController
 {
-     
+
+	public function checkIfAlreadyLikedComment($ip,$comment_id){
+
+	$em = $this->getDoctrine()->getEntityManager();
+   	$conn = $em->getConnection();
+	$sql = $conn->prepare("select comments_liked from commentLikers where ip=:ip");
+	//$sql->bindValue("service",$service);
+	$sql->bindValue('ip',$ip);
+	$sql->execute();
+	$queryResult = $sql->fetchAll();
+	if(count($queryResult) == 0){
+		$sql = $conn->prepare("insert into  commentLikers values(':ip',:comment_id)");
+		$sql->bindValue('ip',$ip);
+		$sql->bindValue('comment_id',$comment_id);
+		$sql->execute();
+		$queryResult = $sql->fetchAll();
+        	$result = array(
+       			'success'=>true,
+         		'data'=>'Inserted into commentLikers'
+        	);
+	}
+	//else: de persoon bestaat al in de DB, en heeft de huidige comment nog niet geliket, of al wel geliket.
+	else{
+		//if($queryResult[0]['comment_id'])
+	}
+        $result = array(
+         'success'=>true,
+         'data'=>$queryResult
+        );
+        return $this->getJSONResponse($result);
+     }
+
+	
+
+
       /**
      * @Route("/incrementVoteCount")
      * @Method({"POST"})
      */
      public function incrementVoteCountByOne(){
 	$comment_id = $this->getRequest()->get('id',0);
+	$this->checkIfAlreadyLikedComment($_SERVER['REMOTE_ADDR'],$comment_id);
 	$target_comment = $this->getRepo('Comment')->find((int)$comment_id);
 	$target_comment->incrementVoteCount();
 	$manager = $this->getDoctrine()->getManager();

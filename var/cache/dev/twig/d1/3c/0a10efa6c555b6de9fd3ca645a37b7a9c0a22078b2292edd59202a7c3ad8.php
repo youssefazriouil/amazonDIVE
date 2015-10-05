@@ -106,19 +106,20 @@ class __TwigTemplate_d13c0a10efa6c555b6de9fd3ca645a37b7a9c0a22078b2292edd59202a7
 
 <script type=\"text/javascript\">
 
-\$(window).load(function() {
-\tsetTimeout(function(){
-\t\tif(\$('#search-field').val() != ''){
-                \t\$('#search-field').css('width','200px');
-        \t}
-\t}, 1000);
-});
-
 \$(function() {
 \t\tcarouseller0 = new carousel('.carouseller.c0');
 \t\tcarouseller1 = new carousel('.carouseller.c1');
 \t\t
 \t});
+
+/*\$(window).load(function() {
+        setTimeout(function(){
+                if(\$('#search-field').val() != ''){
+                        \$('#search-field').css('width','200px');
+                }
+        }, 1000);
+});
+
 
 \$('#search-field').blur(function(){
 \tif(\$(this).val() == ''){
@@ -130,7 +131,7 @@ class __TwigTemplate_d13c0a10efa6c555b6de9fd3ca645a37b7a9c0a22078b2292edd59202a7
 \tif(\$(this).val() == ''){
 \t\t \$('#search-field').animate({width:'+=200px'},'slow');
 \t}
-});
+});*/
 
 \$.getJSON(\"/dive/web/app.php/vu/api/v2/search?keywords=fragment\",function(data){
 \tvar episodes = data['data'];
@@ -156,7 +157,7 @@ class __TwigTemplate_d13c0a10efa6c555b6de9fd3ca645a37b7a9c0a22078b2292edd59202a7
 setCarouselItem = function(carouselnumber, val){
 \t\tvar epimage = val['depicted_by']['placeholder'];
                 var epilink = \"";
-        // line 109
+        // line 110
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
         echo "/";
         echo twig_escape_filter($this->env, (isset($context["dataset"]) ? $context["dataset"] : $this->getContext($context, "dataset")), "html", null, true);
@@ -170,7 +171,7 @@ setCarouselItem = function(carouselnumber, val){
 \t\t\tt_shared_twitter = data['data'][0]['t_shared_twitter'];
 \t\t\tt_pinned_pinterest = data['data'][0]['t_pinned_pinterest'];
 \t\t\t\$(\".\"+carouselnumber+\" .carousel-items\").append(\"<div class='carousel-block'><a href='\"+epilink+\"'><img src='\"+epimage+\"' width='320px'height='180px' /><br><span class='itemTitle'>\"+epititle+\"</span></a><div class='videoStats'><span class='clicks'><img src='";
-        // line 118
+        // line 119
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/cursor.png"), "html", null, true);
         echo "' />\"+t_clicked+\"</span><span class='twitter_shares'><img src='";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/twitter_shared.png"), "html", null, true);
@@ -230,7 +231,7 @@ function dataCallback(data){
 \t\t\tvar uid = data['data'][0]['uid'];
 \t\t\tvar desc = data['data'][0]['description'];
 \t\t\t\$('.carousel-items').append(\"<a test=\"hoi\" href='";
-        // line 171
+        // line 172
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
         echo "/vu#browser\\\\entity\\\\\"+uid+\"'><div class='carousel-block'><img src='\"+ent_plch+\"' width='200px' height='200px' /><br><span class='itemTitle'>\"+title+\"</span><div id='itemDesc' style='display:none;'>\"+desc+\"</div></div></a>\");
 \t\t\t
@@ -238,7 +239,7 @@ function dataCallback(data){
 \t\t
 \t\t\t\$('#poploclink #loc-title').text(data['data'][0]['title'] + \" (\"+voteCount+\")\");
 \t\t\tvar epilink = \"";
-        // line 176
+        // line 177
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
         echo "/";
         echo twig_escape_filter($this->env, (isset($context["dataset"]) ? $context["dataset"] : $this->getContext($context, "dataset")), "html", null, true);
@@ -272,7 +273,7 @@ getMostPopularEntities(10);
 \t\t\t\t\t\t//console.log(JSON.stringify(data));
 \t\t\t\t\t\tvar title = data['data'][0]['title'];
 \t\t\t\t\t\tvar url = \"";
-        // line 205
+        // line 206
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
         echo "/";
         echo twig_escape_filter($this->env, (isset($context["dataset"]) ? $context["dataset"] : $this->getContext($context, "dataset")), "html", null, true);
@@ -310,7 +311,7 @@ getMostPopularEntities(10);
 <div id=\"figures\">
 <div class=\"fpevent\">
 <a href=\"";
-        // line 238
+        // line 239
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
         echo "/#browser\\entity\\http://divetv.ops.labs.vu.nl/entity/got-ficev-BattleOfBlackwater\"><img src=\"/dive/web/img/frontpage-events/blackwater.jpg\"/></a>
 <div class=\"caption\">Battle at Blackwater Bay</div>
@@ -328,7 +329,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
 <div class=\"fpevent\">
 <a href=\"";
-        // line 253
+        // line 254
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
         echo "/#browser\\entity\\http://divetv.ops.labs.vu.nl/entity/got-ficev-ThePurpleWedding\"><img src=\"/dive/web/img/frontpage-events/purplewedding.jpg\"/></a>
 <div class=\"caption\">The Purple Wedding</div>
@@ -336,7 +337,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
 <div class=\"fpevent\">
 <a href=\"";
-        // line 258
+        // line 259
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
         echo "/#browser\\entity\\http://divetv.ops.labs.vu.nl/entity/got-ficev-BattleofCastleBlack\"><img src=\"/dive/web/img/frontpage-events/castleblack.jpg\"/></a>
 <div class=\"caption\">Battle at Castle Black</div>
@@ -344,7 +345,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
 <div class=\"fpevent\">
 <a href=\"";
-        // line 263
+        // line 264
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
         echo "/#browser\\entity\\http://divetv.ops.labs.vu.nl/entity/got-ficev-TheRedWedding\"><img src=\"/dive/web/img/frontpage-events/redwedding.jpg\"/></a>
 <div class=\"caption\">The Red Wedding</div>
@@ -352,7 +353,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
 <div class=\"fpevent\">
 <a href=\"";
-        // line 268
+        // line 269
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
         echo "/#browser\\entity\\http://divetv.ops.labs.vu.nl/entity/got-ficev-MountainAndViper\"><img src=\"/dive/web/img/frontpage-events/mountainandviper.jpg\"/></a>
 <div class=\"caption\">Duel of the Mountain and the Viper</div>
@@ -371,7 +372,6 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
                 \$(this).children('img').css({outline: 'none'});
         }
         );
-//\$('#tagcampaign').load('ec2-52-28-200-8.eu-central-1.compute.amazonaws.com:8080/tagcampaign.html #channel1');
 
 </script>
 
@@ -388,31 +388,18 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
   </div>
 </div>
 
-
-<!--<div class=\"carouseller c1 row-fluid for-car\">
-
-  <div class=\"carousel-wrapper\">
-    <div class=\"carouselTitle\">The latest Tag campaign!</div>
-    <div class=\"carouselUnderTitle\">Earn double the points while you still can.</div>
-    <div class=\"callToTag\">
-    <div class=\"carousel-items\">
-    </div><!--end carousel-items-->
-  </div><!--end carousel-wrapper-->
- <div class=\"carousel-control-block\">
-    <div class=\"carousel-button-left shadow\"><a href=\"javascript:void(0)\">‹</a></div>
-    <div class=\"carousel-button-right shadow\"><a href=\"javascript:void(0)\">›</a></div>
-  </div>
-</div> <!--end call to tag -->
-</div>
 <!--end carousellers-->
--->
+
 
 <div id=\"tagcampaign\">
-<iframe width='100%' scrolling='no' src=\"http://ec2-52-28-200-8.eu-central-1.compute.amazonaws.com:8080/tagcampaign.html\"></iframe>
+<iframe width='100%' height='100%' src=\"http://ec2-52-28-200-8.eu-central-1.compute.amazonaws.com:8080/tagcampaign.html\"></iframe>
 </div>
 
+</div><-- end homepage -->
+</div><!-- End content -->
+
 <script type=\"text/javascript\" src=\"";
-        // line 325
+        // line 312
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("js/jquery.qtip.js"), "html", null, true);
         echo "\"></script>
 <script>
@@ -440,7 +427,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
 <!--<div id=\"centerlogo\">
 <a href=\"http://www.crowddriven.nl\"><img src=\"";
-        // line 350
+        // line 337
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/CDTag.png"), "html", null, true);
         echo "\"></a>
 </div>
@@ -453,7 +440,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 <div id=\"game_leaderboard\">
 \t<div class=\"goToPlay\">
 \t\t<a href=\"http://ec2-54-93-224-169.eu-central-1.compute.amazonaws.com:8080/campaign.html\"><img src=\"";
-        // line 360
+        // line 347
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/arya_playgame.png"), "html", null, true);
         echo "\"></a>
 \t</div>
@@ -474,7 +461,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
 \t<div class=\"goToPlay\">
                 <a href=\"http://ec2-54-93-224-169.eu-central-1.compute.amazonaws.com:8080/campaign.html\"><img src=\"";
-        // line 378
+        // line 365
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/nedd_playgame.png"), "html", null, true);
         echo "\"></a>
         </div>
@@ -486,7 +473,7 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 </div>
 
 ";
-        // line 387
+        // line 374
         $this->env->loadTemplate("DiveFrontBundle:General:help.html.twig")->display($context);
         echo trim(preg_replace('/>\s+</', '><', ob_get_clean()));
     }
@@ -503,6 +490,6 @@ The entire episode is dedicated to the climactic Battle of the Blackwater, in wh
 
     public function getDebugInfo()
     {
-        return array (  490 => 387,  478 => 378,  457 => 360,  444 => 350,  416 => 325,  356 => 268,  348 => 263,  340 => 258,  332 => 253,  314 => 238,  276 => 205,  242 => 176,  234 => 171,  174 => 118,  160 => 109,  103 => 55,  99 => 54,  95 => 53,  91 => 52,  56 => 20,  49 => 16,  42 => 12,  33 => 5,  31 => 4,  28 => 3,);
+        return array (  477 => 374,  465 => 365,  444 => 347,  431 => 337,  403 => 312,  357 => 269,  349 => 264,  341 => 259,  333 => 254,  315 => 239,  277 => 206,  243 => 177,  235 => 172,  175 => 119,  161 => 110,  103 => 55,  99 => 54,  95 => 53,  91 => 52,  56 => 20,  49 => 16,  42 => 12,  33 => 5,  31 => 4,  28 => 3,);
     }
 }

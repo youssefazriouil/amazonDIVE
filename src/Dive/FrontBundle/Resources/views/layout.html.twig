@@ -56,10 +56,10 @@
   <body class="{% block bodyClass %}{% endblock %}">
     {% block page %}
      <div id="topbar">
-      <!--<img src="{{ asset('img/CDD.png') }}" id="logo" onclick="document.location.href = '{{ app.request.baseUrl }}'; return false;">-->
+      <img src="{{ asset('img/CDD.png') }}" id="logo" onclick="document.location.href = '{{ app.request.baseUrl }}'; return false;">
      <div class="row">
                 <input type="text" placeholder="Start exploring!" id="search-field" />
-                <div id="search-cross"></div>
+                <!--<div id="search-cross"></div>-->
       </div>
 
       <!--<div id="log"></div>

@@ -57,19 +57,20 @@
 
 <script type="text/javascript">
 
-$(window).load(function() {
-	setTimeout(function(){
-		if($('#search-field').val() != ''){
-                	$('#search-field').css('width','200px');
-        	}
-	}, 1000);
-});
-
 $(function() {
 		carouseller0 = new carousel('.carouseller.c0');
 		carouseller1 = new carousel('.carouseller.c1');
 		
 	});
+
+/*$(window).load(function() {
+        setTimeout(function(){
+                if($('#search-field').val() != ''){
+                        $('#search-field').css('width','200px');
+                }
+        }, 1000);
+});
+
 
 $('#search-field').blur(function(){
 	if($(this).val() == ''){
@@ -81,7 +82,7 @@ $('#search-field').focus(function(){
 	if($(this).val() == ''){
 		 $('#search-field').animate({width:'+=200px'},'slow');
 	}
-});
+});*/
 
 $.getJSON("/dive/web/app.php/vu/api/v2/search?keywords=fragment",function(data){
 	var episodes = data['data'];
@@ -282,7 +283,6 @@ $('.fpevent a').hover(function(){
                 $(this).children('img').css({outline: 'none'});
         }
         );
-//$('#tagcampaign').load('ec2-52-28-200-8.eu-central-1.compute.amazonaws.com:8080/tagcampaign.html #channel1');
 
 </script>
 
@@ -299,28 +299,15 @@ $('.fpevent a').hover(function(){
   </div>
 </div>
 
-
-<!--<div class="carouseller c1 row-fluid for-car">
-
-  <div class="carousel-wrapper">
-    <div class="carouselTitle">The latest Tag campaign!</div>
-    <div class="carouselUnderTitle">Earn double the points while you still can.</div>
-    <div class="callToTag">
-    <div class="carousel-items">
-    </div><!--end carousel-items-->
-  </div><!--end carousel-wrapper-->
- <div class="carousel-control-block">
-    <div class="carousel-button-left shadow"><a href="javascript:void(0)">‹</a></div>
-    <div class="carousel-button-right shadow"><a href="javascript:void(0)">›</a></div>
-  </div>
-</div> <!--end call to tag -->
-</div>
 <!--end carousellers-->
--->
+
 
 <div id="tagcampaign">
-<iframe width='100%' scrolling='no' src="http://ec2-52-28-200-8.eu-central-1.compute.amazonaws.com:8080/tagcampaign.html"></iframe>
+<iframe width='100%' height='100%' src="http://ec2-52-28-200-8.eu-central-1.compute.amazonaws.com:8080/tagcampaign.html"></iframe>
 </div>
+
+</div><-- end homepage -->
+</div><!-- End content -->
 
 <script type="text/javascript" src="{{asset('js/jquery.qtip.js') }}"></script>
 <script>

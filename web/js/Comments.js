@@ -154,7 +154,7 @@ Comments.prototype.initContribute = function(){
 					$.post(Global.basePath + 'comment/incrementVoteCount', {
                                			id: comment_id
                         		}, function(data){
-						//alert(JSON.stringify(data));
+						console.log(JSON.stringify(data));
                                		 	$(this).parent().siblings('.voteCount').text(data.data);
                        			}.bind(this)
 					);

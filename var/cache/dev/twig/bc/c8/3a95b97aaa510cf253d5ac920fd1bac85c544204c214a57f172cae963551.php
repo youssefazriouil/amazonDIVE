@@ -224,15 +224,15 @@ class __TwigTemplate_bcc83a95b97aaa510cf253d5ac920fd1bac85c544204c214a57f172cae9
     {
         // line 58
         echo "     <div id=\"topbar\">
-      <!--<img src=\"";
+      <img src=\"";
         // line 59
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/CDD.png"), "html", null, true);
         echo "\" id=\"logo\" onclick=\"document.location.href = '";
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "request"), "baseUrl"), "html", null, true);
-        echo "'; return false;\">-->
+        echo "'; return false;\">
      <div class=\"row\">
                 <input type=\"text\" placeholder=\"Start exploring!\" id=\"search-field\" />
-                <div id=\"search-cross\"></div>
+                <!--<div id=\"search-cross\"></div>-->
       </div>
 
       <!--<div id=\"log\"></div>
