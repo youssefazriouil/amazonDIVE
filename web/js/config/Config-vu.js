@@ -23,7 +23,8 @@ function Config(){
 	this.contentButtons = [
 	['Comments','View and add comments to this entity'],
 	['Details','Entity details, relations and sources'],
-	['Games','View games this entity is featured in'],
+	['Meta', 'Meta information we found on this entity'],
+	//['Games','View games this entity is featured in'],
 	['AddRelated','Add related entities to this entity']
 	];
 }

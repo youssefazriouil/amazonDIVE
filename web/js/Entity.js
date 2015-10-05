@@ -786,6 +786,8 @@ Entity.prototype.showContent = function(content){
 			case "europeana": if (!this.europeana) { this.europeana = new Europeana(this); this.$contentHolder.append(this.europeana.getContainer()); } break;
 			case "share": if (!this.share) { this.share = new Share(this); this.$contentHolder.append(this.share.getContainer()); } break;
 			case "addrelated": if (!this.add) { this.add = new addRelated(this); this.$contentHolder.append(this.add.getContainer()); } break;
+			case "meta": if (!this.meta) { this.meta = new meta(this); this.$contentHolder.append(this.meta.getContainer()); } break;
+
 	}
 	
 	// show
